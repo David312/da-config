@@ -1,0 +1,7 @@
+[alias]
+	up = pull origin
+	st = status
+	ci = "!git commit -a && git push origin"
+	co = checkout
+	br = branch
+	logp = log --graph --pretty=oneline --abbrev-commit

@@ -1,0 +1,8 @@
+   64  sudo pacman -S xorg-font-util xorg-font-utils xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-encodings
+   65  sudo pacman -S xorg-fonts-alias xorg-fonts-misc xorg-fonts-type1
+   66  sudo pacman -S xorg-mkfontdir xorg-mkfontscale
+   67  sudo pacman -S libxfont libxfont2
+   68  sudo pacman -S libfontenc 
+   69  sudo pacman -S gsfonts
+   70  sudo pacman -S fontsproto
+
