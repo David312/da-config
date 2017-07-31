@@ -91,12 +91,14 @@ source $ZSH/oh-my-zsh.sh
 zstyle ':completion:*' special-dirs true
 
 EMACS=$(which emacs)
+EMACS_FOUND=$?
 EMACSCL=$(which emacsclient)
+EMACSCL_FOUND=$?
 
 alias cl='clear'
 alias rs='reset'
 
-if [[ -n $EMACS && -n $EMACSCL ]] # if variables are not null
+if [[ $EMACS_FOUND -eq 0 && $EMACSCL_FOUND -eq 0 ]] # if emacs bin are found
 then 
    alias emacss="$EMACS"
    alias emacs="$EMACSCL -c"
@@ -108,6 +110,7 @@ then
 fi
 
 unset EMACS
+unset EMACS_FOUND
 unset EMACSCL
-
+unset EMACSCL_FOUND
 
