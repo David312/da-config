@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 RESULTS_DIR='/tmp/diff'
 
@@ -9,9 +9,6 @@ function diff_subdir {
 
 
 function diff_files {
-    # echo for f in "$1"/.*
-    # exit 0
-    
     for f in "$1"/.* # "$1"/*
     do
 	BASE=`basename "$f"`
@@ -37,6 +34,7 @@ function main {
     fi
 
     diff_files '.'
+    echo "Log file with differences saved in $RESULTS_DIR."
     exit 0
 }
 
