@@ -2,27 +2,22 @@
 
 RESULTS_DIR='/tmp/diff'
 
-
-function diff_subdir {
-    diff_files "$1"
-}
-
-
 function diff_files {
-    for f in "$1"/.* # "$1"/*
+    for f in "$1"/.* "$1"/*
     do
 	BASE=`basename "$f"`
-	if test "$BASE" != '.' -a "$BASE" != '..' -a "$BASE" != '.z'
+	if test \( "$BASE" != '.' \) -a \( "$BASE" != '..' \) -a \( "$BASE" != '.z' \)
 	then
 	    if test -d "$BASE"
 	    then
-		diff_subdir "$f"
+		diff_files "$f"
 	    fi
 	
 	    echo "$f:" >> "$RESULTS_DIR"
 	    diff "$f" ~/"$f" >> "$RESULTS_DIR" 2> /dev/null
 	fi
     done
+    unset f
 }
 
 
