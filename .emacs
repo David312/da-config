@@ -14,6 +14,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 
+;; Ido mode
+(require 'ido)
+    (ido-mode t)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
@@ -21,6 +25,7 @@
 
 ;; checks if use-package is installed and installs it if it doesn't
 (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 ;(setq use-package-verbose t)  ;; commented because leads to problems
