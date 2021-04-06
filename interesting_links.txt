@@ -1,0 +1,3 @@
+# Cool guide to set up i3
+https://github.com/addy-dclxvi/i3-starterpack
+
