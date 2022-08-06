@@ -1,0 +1,8 @@
+{
+  "languageserver": {
+  "erlang": {
+    "command": "erlang_ls",
+    "filetypes": ["erlang"]
+    }
+  }
+}
