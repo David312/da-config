@@ -19,3 +19,4 @@ function! LoadPluginConfig(name)
 endfunction
 
 call LoadPluginConfig("nerd-tree.vim")
+call LoadPluginConfig("coc.vim")
