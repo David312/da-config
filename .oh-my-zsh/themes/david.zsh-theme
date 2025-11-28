@@ -1,15 +1,48 @@
 local NEWLINE=$'\n'
-local CUR_DIR_END="%{$fg_bold[yellow]%}"$""
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-local directory_route="%{$fg_bold[cyan]%}%~${CUR_DIR_END}${NEWLINE}"
-local user_name="%{$fg_bold[blue]%}%n"
-local host_name="%{$fg_bold[yellow]%}"@"%M"
-local USER_INFO="${user_name}${host_name}"
-local JOBS_INFO="%{$fg_bold[red]%}[%j]%{$reset_color%}"
-PROMPT='${directory_route}${USER_INFO} ${JOBS_INFO} ${ret_status}\
-%{$reset_color%}$(git_prompt_info)'
+local CURSOR="$"
+local SUBCURSOR=">"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+local lines_color="%F{#e5e5e5}"
+
+draw() {
+	echo "%b${lines_color}$1%f"
+}
+
+prompt_group() {
+	echo "$(draw "[")%B$1%b$(draw "]")"
+}
+
+prompt_cwd() {
+	prompt_group "%F{#00e5e5}%~"
+}
+
+prompt_user_info() {
+	prompt_group "$(prompt_user)%F{#9696ff}@$(prompt_host)"
+}
+
+prompt_user() {
+	echo "%F{#6767ff}%n"
+}
+
+prompt_host() {
+	echo "%F{#67ff67}%M"
+}
+
+prompt_jobs() {
+	prompt_group "%F{#e59400}Jobs: %j"
+}
+
+prompt_ret_status() {
+	echo "%(?:%F{#67ff67}:%F{#ef0000})%B${CURSOR}%b%f"
+}
+
+PROMPT='\
+$(draw "┌─$(prompt_cwd)")${NEWLINE}\
+$(draw "└─$(prompt_user_info)$(prompt_jobs)$(prompt_ret_status)") $(git_prompt_info)'
+RPROMPT='$(prompt_group "%*")'
+PS2=' $(draw "%B${SUBCURSOR}%b") '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{#6767ff}%Bgit:(%F{#ef0000}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b "
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{#6767ff}) %F{#efef00}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%F{#6767ff})"
